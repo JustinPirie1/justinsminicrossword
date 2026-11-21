@@ -1,0 +1,12 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const root=new URL('../',import.meta.url);
+const read=name=>readFile(new URL(name,root),'utf8');
+let html=await read('index.html');
+const [css,model,app,icon]=await Promise.all(['style.css','model.js','app.js','icon.svg'].map(read));
+const dataIcon=`data:image/svg+xml;base64,${Buffer.from(icon).toString('base64')}`;
+html=html.replace('<link rel="stylesheet" href="./style.css">',()=>`<style>${css}</style>`);
+const script=model.replace(/^export /gm,'')+'\n'+app.replace(/^import .* from '\.\/model\.js';\n/,'');
+html=html.replace('<script type="module" src="./app.js"></script>',()=>`<script type="module">${script.replaceAll('</script','<\\/script')}</script>`);
+html=html.replaceAll('./icon.svg',dataIcon);
+await writeFile(new URL('crossword.html',root),html);
+console.log('Built crossword.html: standalone, no external requests.');

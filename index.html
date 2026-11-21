@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff"><meta name="description" content="A little crossword, made for you. Play Justin’s Mini or create a custom puzzle to share with a friend.">
+<title>Justin’s Mini · A little wordplay</title>
+<link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="site-header"><a class="brand" href="#" aria-label="Justin’s Mini home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M1 1h28v28H1z" fill="white" stroke="currentColor" stroke-width="2"/><path d="M10 1v28M20 1v28M1 10h28M1 20h28" stroke="currentColor"/><path d="M11 11h8v8H11zM1 21h9v8H1zM21 1h8v9h-8z" fill="currentColor"/></svg><span>Justin’s <strong>Mini</strong></span></a><nav aria-label="Main"><button id="play-tab" class="nav-tab active">Play</button><button id="create-tab" class="nav-tab">Create a puzzle</button></nav><button class="icon-button" id="help" aria-label="How to play">?</button></header>
+<main>
+<section id="player-view">
+<div class="puzzle-heading"><div><h1 id="puzzle-title">The Mini</h1><p id="puzzle-byline">A little crossword by Justin</p></div><span class="edition-label">THE MINI CROSSWORD</span></div>
+<div class="game-toolbar"><button id="pause" class="timer" aria-label="Pause puzzle"><span id="time">0:00</span><span class="pause-icon">Ⅱ</span></button><div class="tools"><button id="sound" aria-label="Mute completion sound" aria-pressed="true">Sound on</button><details id="check-menu"><summary>Check</summary><div class="tool-menu"><button data-assist="check-letter">Square</button><button data-assist="check-word">Word</button><button data-assist="check-puzzle">Puzzle</button></div></details><details id="reveal-menu"><summary>Reveal</summary><div class="tool-menu"><button data-assist="reveal-letter">Square</button><button data-assist="reveal-word">Word</button><button data-assist="reveal-puzzle">Puzzle</button></div></details><button id="restart">Restart</button></div></div>
+<div class="game-layout"><div class="board-column"><div class="clue-bar"><button id="previous-clue" aria-label="Previous clue">‹</button><div id="active-clue" aria-live="polite"></div><button id="next-clue" aria-label="Next clue">›</button></div><div id="play-grid" class="crossword-grid" role="group" aria-label="Crossword grid"></div><p class="board-hint">Tap a square again to change direction.</p></div><div class="clue-lists"><section><h2>ACROSS</h2><div id="across-clues"></div></section><section><h2>DOWN</h2><div id="down-clues"></div></section></div></div>
+<div id="play-symbols" class="symbol-palette" hidden></div><div id="keyboard" class="keyboard" aria-label="On-screen keyboard"></div>
+<div class="player-bottom"><span>A custom crossword by Justin.</span><button id="share-player">Share this puzzle</button></div>
+</section>
+<section id="editor-view" hidden>
+<div class="puzzle-heading"><div><p class="eyebrow">PUZZLE CONSTRUCTOR</p><h1>Create a puzzle.</h1><p>Set the grid, fill the answers, and write your clues.</p></div><span class="save-label" id="draft-status">Draft saved on this device</span></div>
+<div class="editor-toolbar"><div class="editor-actions"><button class="primary" id="publish-puzzle">Share puzzle</button><button id="preview-puzzle">Test play</button></div><div class="editor-actions"><button id="export-puzzle">Export JSON</button><button id="import-puzzle">Import JSON</button><button id="new-puzzle">New puzzle</button><input type="file" id="import-file" accept="application/json,.json" hidden></div></div>
+<div class="editor-layout"><div class="editor-board-panel"><div class="meta-fields"><label>Puzzle title<input id="edit-title" maxlength="100" placeholder="A Mini for you"></label><label>Made by<input id="edit-author" maxlength="60" placeholder="Your name"></label></div><div class="size-row"><label>Columns<select id="grid-width"></select></label><span>×</span><label>Rows<select id="grid-height"></select></label><button id="resize-grid">Resize</button></div><div class="draw-toolbar" role="group" aria-label="Grid editing mode"><button id="letters-mode" class="selected" aria-pressed="true">Aa · Letters</button><button id="blocks-mode" aria-pressed="false">■ · Black squares</button><button id="insert-symbol">☺ Emoji square</button></div><div id="edit-grid" class="crossword-grid" role="group" aria-label="Answer grid"></div><div id="edit-keyboard" class="keyboard editor-keyboard" aria-label="Constructor keyboard"></div><div class="editor-options"><label><input type="checkbox" id="symmetry"> Mirror black squares</label><span id="edit-direction">Typing Across</span></div><p class="editor-hint">Click a square and type, or fill the answers beside each clue. Use the black-square tool to draw your layout.</p><div id="validation" class="validation" aria-live="polite"></div></div><div class="editor-clues-panel"><div class="clue-panel-heading"><h2>The clues</h2><span>Answers are just for you</span></div><div class="direction-tabs"><button id="edit-across" class="selected">Across</button><button id="edit-down">Down</button></div><div id="editor-clues"></div></div></div>
+</section>
+</main>
+<footer><span>Justin’s Mini</span><span>An independent crossword project.</span></footer>
+<dialog id="modal"><button id="close-modal" class="modal-close" aria-label="Close dialog">×</button><div id="modal-content"></div></dialog>
+<div id="toast" class="toast" role="status"></div>
+<script type="module" src="./app.js"></script>
+</body></html>
